@@ -1,11 +1,10 @@
 package com.example.viewpager2
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.viewpager2.widget.ViewPager2
+import androidx.appcompat.app.AppCompatActivity
 import com.example.viewpager2.databinding.ActivityMainBinding
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -21,10 +20,8 @@ class MainActivity : AppCompatActivity() {
         val adapter = ViewPagerAdapter(images)
         binding.viewPager.adapter = adapter
 
-        binding.viewPager.orientation = ViewPager2.ORIENTATION_VERTICAL
-
-        binding.viewPager.beginFakeDrag()
-        binding.viewPager.fakeDragBy(-10f)
-        binding.viewPager.endFakeDrag()
+        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
+            tab.text = "Tab ${position + 1}"
+        }.attach()
     }
 }
